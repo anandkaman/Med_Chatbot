@@ -69,6 +69,3 @@ The project is designed to be modular and adaptable.
 *   **Using Your Own Data**: The entire chatbot can be repurposed for any subject by simply replacing the `Medical_book.pdf` file in the `/data` folder with another PDF. After replacing the file, delete the old `/vector_store` directory and run `python backend/ingest.py` again to create a new knowledge base. The app will then answer questions based on your new document.
 *   **Changing Models**: The embedding and generative models can be easily swapped. To use a different model, change the `model_name` variable in `rag_pipeline.py` (and `ingest.py` for the embedding model) to another model identifier from the Hugging Face Hub. Note that more powerful models may require more RAM and a GPU for acceptable performance.
 *   **Scaling Up**: For extremely large documents or high traffic applications, the local FAISS index could become a bottleneck. A future step for scalability would be to replace the local index with a dedicated vector database server like **Pinecone**, **Weaviate**, or **ChromaDB**. This would offload the storage and search operations to a more robust and scalable service.
-
-
-[2](https://github.com/anandkaman/Med_Chatbot)
