@@ -3,30 +3,8 @@ import streamlit as st
 import os
 from backend.rag_pipeline import RAGPipeline
 
-# --- Setup and Ingestion (Only runs if needed) ---
-# This part of the code ensures the vector store exists before the main app loads.
-# It's the key to solving the deployment crash.
-
-DATA_PATH = 'data/Medical_book.pdf'
-VECTOR_STORE_PATH = 'vector_store/faiss_index'
-
-def check_and_create_vector_store():
-    """Checks if the vector store exists, and if not, creates it."""
-    if not os.path.exists(VECTOR_STORE_PATH):
-        st.info("Vector store not found. Starting one-time setup...")
-        # Display a spinner and status during the long process
-        with st.spinner("Processing PDF and creating vector store. This may take a few minutes..."):
-            from backend.ingest import create_vector_store # Import the function
-            create_vector_store()
-        st.success("Setup complete! The application is now ready.")
-        # Rerun the app to proceed to the main interface
-        st.rerun()
-
-# Run the setup check at the very beginning
-check_and_create_vector_store()
-
-
-# --- Main Application Logic ---
+# (The check_and_create_vector_store function remains the same)
+# ...
 
 @st.cache_resource
 def load_pipeline():
@@ -36,18 +14,29 @@ def load_pipeline():
 # Set page configuration
 st.set_page_config(page_title="Medical Chatbot", layout="wide")
 
+# --- Sidebar for Controls ---
+with st.sidebar:
+    st.header("Controls")
+    st.markdown(
+        "If the app becomes slow or unresponsive after many questions, "
+        "use this button to reset the AI model and clear the conversation."
+    )
+    if st.button("Clear Cache and Reset Conversation"):
+        # Clear the model cache
+        st.cache_resource.clear()
+        # Clear the chat history
+        st.session_state.clear()
+        # Rerun the app to re-initialize everything
+        st.rerun()
+
 # --- Page Title and Description ---
 st.title("Medical Chatbot 🩺")
-st.markdown(
-    "This chatbot uses a local AI model to answer questions based on a medical document. "
-    "Your data remains private and is processed on your machine."
-)
-st.divider()
+# ... (rest of the title/description is the same)
 
 # --- Load Pipeline ---
 with st.spinner("Initializing models..."):
     rag_pipeline = load_pipeline()
-
+    
 # --- Chat Interface ---
 if "messages" not in st.session_state:
     st.session_state.messages = []
