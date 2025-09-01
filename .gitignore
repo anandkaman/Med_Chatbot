@@ -18,5 +18,5 @@ venv/
 *.swp
 
 # Local data and model stores
-vector_store/
+#vector_store/
 #data/
