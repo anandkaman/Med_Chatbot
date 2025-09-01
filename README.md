@@ -10,6 +10,7 @@ This project is a private, locally-hosted medical question-answering chatbot. It
 *   **Self-Contained & Deployable**: Automatically creates the necessary vector store on first run, making it easy to deploy.
 
 ### Project Structure
+"""
 medical-chatbot/
 ├── backend/
 │ ├── rag_pipeline.py # Core RAG logic
@@ -21,7 +22,7 @@ medical-chatbot/
 ├── README.md # This file
 ├── ABOUT.md # Project origin and development story
 └── requirements.txt # Python dependencies
-
+"""
 
 ### Getting Started
 
