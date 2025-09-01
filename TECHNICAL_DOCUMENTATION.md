@@ -4,13 +4,13 @@ This document provides a deep dive into the technical architecture, components, 
 
 ## 1. Project Architecture Overview
 
-The chatbot is built on a **Retrieval-Augmented Generation (RAG)** pipeline. This architecture allows a Large Language Model (LLM) to answer questions based on a specific knowledge base (in this case, a medical PDF) instead of relying solely on its pre-trained knowledge.
+The chatbot is built on a **Retrieval Augmented Generation (RAG)** pipeline. This architecture allows a Large Language Model (LLM) to answer questions based on a specific knowledge base (in this case, a medical PDF) instead of relying solely on its pre-trained knowledge.
 
-The process is entirely local and private, using open-source models from Hugging Face and a local vector store.
+The process is entirely local and private, using open source models from Hugging Face and a local vector store.
 
 The workflow is divided into two main stages:
-1.  **Ingestion (Indexing)**: A one-time process where the source PDF is read, processed, and converted into a searchable vector index using FAISS. This is handled by `ingest.py`.
-2.  **Inference (Question-Answering)**: The real-time process where a user's query is used to retrieve relevant information from the vector index, which is then fed to an LLM to generate a human-like answer. This is managed by `rag_pipeline.py` and served via the `app.py` Streamlit interface.
+1.  **Ingestion (Indexing)**: A one time process where the source PDF is read, processed, and converted into a searchable vector index using FAISS. This is handled by `ingest.py`.
+2.  **Inference (Question Answering)**: The real-time process where a user's query is used to retrieve relevant information from the vector index, which is then fed to an LLM to generate a human-like answer. This is managed by `rag_pipeline.py` and served via the `app.py` Streamlit interface.
 
 ## 2. Core Components
 
