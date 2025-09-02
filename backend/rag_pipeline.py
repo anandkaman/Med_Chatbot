@@ -36,16 +36,10 @@ class RAGPipeline:
         pipe = pipeline("text2text-generation", model=model, tokenizer=tokenizer, max_length=512)
         return HuggingFacePipeline(pipeline=pipe)
 
-    # In backend/rag_pipeline.py
-
-# ... (rest of the class definition and other methods are the same)
-
-    # In backend/rag_pipeline.py
 
     def _setup_chain(self):
         """Sets up the Map-Reduce RAG chain with more concise prompts."""
         
-        # --- MORE CONCISE MAP PROMPT ---
         map_template = """
         Extract any sentences from the text below that mention treatments, medications, or remedies for the user's question. If none, say 'No relevant information found.'
         Text: '{text}'
@@ -69,12 +63,6 @@ class RAGPipeline:
             combine_document_variable_name="text",
             verbose=False
         )
-
-# ... (rest of the class is the same)
-
-    # In backend/rag_pipeline.py
-
-# ... (rest of the class definition is the same)
 
     def ask(self, question: str) -> dict:
         """Asks a question to the RAG pipeline and returns answer and debug info."""
