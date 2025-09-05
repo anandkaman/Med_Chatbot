@@ -74,9 +74,6 @@ body {
 </style>
 """, unsafe_allow_html=True)
 
-# (The check_and_create_vector_store function remains the same)
-# ...
-
 @st.cache_resource
 def load_pipeline():
     """Loads the RAG pipeline. This will only run after the vector store is confirmed to exist."""
@@ -103,7 +100,6 @@ st.markdown("""
 
 
 # --- Load Pipeline ---
-# The check for the vector store needs to happen before loading the pipeline.
 VECTOR_STORE_PATH = "vector_store/faiss_index"
 if not os.path.exists(VECTOR_STORE_PATH):
     with st.spinner("First-time setup: Creating vector store from PDF... This may take a moment."):
@@ -148,7 +144,7 @@ st.markdown("---")
 st.markdown(
     """
     <div class="footer">
-        <p>Built By <a href="https://github.com/anandkaman" target="_blank">Anand K</a> and Rishab T</p>
+        <p>Built By <a href="https://github.com/anandkaman" target="_blank">Anand K</a></p>
     </div>
     """,
     unsafe_allow_html=True
